@@ -200,7 +200,7 @@ paths:
         - name: status
           in: query
           schema:
-            $ref: '#/components/schemas/CourseStatus'
+              $ref: '#/components/schemas/CourseStatus'
           description: By default, LINKED courses are provided.
       operationId: getStudentCoursesById
       responses:
@@ -209,7 +209,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Course'
+                type: array
+                items:
+                    $ref: '#/components/schemas/Course'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -388,6 +390,36 @@ paths:
           description: Set value to 15 by default if null is provided
           schema:
             $ref: '#/components/schemas/PageSize'
+        - name: code
+          in: query
+          required: false
+          description: Filter courses by code, case is ignored
+          schema:
+           type: string
+        - name: name
+          in: query
+          required: false
+          description: Filter courses by name, case is ignored
+          schema:
+           type: string
+        - name: credits
+          in: query
+          required: false
+          description: Filter courses by credits, case is ignored           
+          schema:
+           type: integer
+        - name: teacher_first_name
+          in: query
+          required: false
+          description: Filter courses by teacher first name, case is ignored
+          schema:
+           type: string
+        - name: teacher_last_name
+          in: query
+          required: false
+          description: Filter courses by techer last name, case is ignored
+          schema:
+           type: string
       responses:
         '200':
           description: List of all courses
